@@ -1,32 +1,41 @@
+// npm i
+// npx expo start
+
+import React, { useState } from 'react';
 import { Button, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
+import Post from '../Components/Post';
+import NewPostForm from '../Components/NewPostForm';
 
 export default function Feed({ navigation }) {
-  const GIVEN_POSTS = [
-    {
-      _id: 1,
-      username: 'James',
-      body: 'Mobile development is fun!',
-    },
-    {
-      _id: 2,
-      username: 'Sidd',
-      body: 'I just finished watching another movie. It was interesting, but kind of boring :(',
-    },
-    {
-      _id: 3,
-      username: 'Jerry',
-      body: 'I am excited to see everyone become friends!',
-    },
-  ];
+  const [posts, setPosts] = useState([]);
+  const [newId, setNewId] = useState(0);
 
   const navigateToLanding = () => {
     navigation.navigate('Landing');
   };
 
+  const addNewPost = (newPost) => {
+    const updatedPosts = [...posts];
+    updatedPosts.push({ ...newPost, _id: newId });
+    setPosts(updatedPosts);
+    setNewId((id) => (id + 1));
+  };
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Posts</Text>
+      <NewPostForm addNewPost={addNewPost} />
+      {posts.map((post) => (
+        <Post
+          key={post.id}
+          username={post.username}
+          body={post.body}
+          // time={post.time}
+          navigation={navigation}
+        />
+      ))}
+
       <Button
         title="To Landing"
         onPress={navigateToLanding}

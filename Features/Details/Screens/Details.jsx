@@ -1,17 +1,16 @@
 import React from 'react';
-import {
-  Button, Text, View,
-} from 'react-native';
+import { Button, View } from 'react-native';
 import PropTypes from 'prop-types';
+import PostDetails from '../Components/PostDetails';
 
-export default function Landing({ navigation }) {
+export default function Details({ navigation }) {
   const navigateToFeed = () => {
     navigation.navigate('Feed');
   };
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Landing Page</Text>
+      <PostDetails username="hi" />
       <Button
         title="To Feed"
         onPress={navigateToFeed}
@@ -20,7 +19,7 @@ export default function Landing({ navigation }) {
   );
 }
 
-Landing.propTypes = {
+Details.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func,
   }).isRequired,

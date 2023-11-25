@@ -7,7 +7,8 @@ export default function NewPostForm({ addNewPost }) {
   const [body, setBody] = useState('');
 
   const handleAddPost = () => {
-    addNewPost({ username, body });
+    const currentTime = new Date().toISOString();
+    addNewPost({ username, body, time: currentTime });
     setUsername('');
     setBody('');
   };
@@ -15,12 +16,12 @@ export default function NewPostForm({ addNewPost }) {
   return (
     <>
       <TextInput
-        placeholder="Who is this?"
+        placeholder="Author: "
         onChangeText={setUsername}
         value={username}
       />
       <TextInput
-        placeholder="What are you printing?"
+        placeholder="Body: "
         onChangeText={setBody}
         value={body}
       />

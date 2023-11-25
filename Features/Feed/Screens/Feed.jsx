@@ -31,7 +31,7 @@ export default function Feed({ navigation }) {
           key={post.id}
           username={post.username}
           body={post.body}
-          // time={post.time}
+          time={post.time}
           navigation={navigation}
         />
       ))}

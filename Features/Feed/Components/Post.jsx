@@ -3,13 +3,11 @@ import { Text, Button } from 'react-native';
 import PropTypes from 'prop-types';
 
 export default function Post({
-  username, body, /* time, */ navigation,
+  username, body, time, navigation,
 }) {
-  const navigateToDetails = () => {
-    navigation.navigate('Details');
+  const handleDetails = () => {
+    navigation.navigate('Details', { username, body, time });
   };
-
-  // const nowTime = new Date(time).toISOString();
 
   return (
     <>
@@ -25,7 +23,7 @@ export default function Post({
       </Text>
       <Button
         title="Details"
-        onPress={navigateToDetails}
+        onPress={handleDetails}
       />
     </>
   );
@@ -34,7 +32,7 @@ export default function Post({
 Post.propTypes = {
   username: PropTypes.string.isRequired,
   body: PropTypes.string.isRequired,
-  // time: PropTypes.string.isRequired,
+  time: PropTypes.string.isRequired,
   navigation: PropTypes.shape({
     navigate: PropTypes.func,
   }).isRequired,
